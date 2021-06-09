@@ -89,10 +89,10 @@ export type CardPackType={
     private: boolean
     rating: number
     shots: number
-    type:string
+    type: string
     updated: string
     user_id: string
     user_name: string
     __v: number
-    _id:string
+    _id: string
 }

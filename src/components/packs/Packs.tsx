@@ -12,12 +12,14 @@ type PackSelectorType ={
     cardPacksTotalCount: number
     page: number
     pageCount: number
+    loading: boolean
+    error: string
 }
 
 export const Packs = () => {
 
     const dispatch = useDispatch();
-    let {packs, cardPacksTotalCount, page, pageCount} = useSelector<appRootStateType, PackSelectorType>(state => state.packs);
+    let {packs, cardPacksTotalCount, page, pageCount, loading, error} = useSelector<appRootStateType, PackSelectorType>(state => state.packs);
     let [addingPackName, setAddingPackName] = useState("");
     let [privatePack, setPrivatePack] = useState(false);
     let [filterPackName, setFilterPackName] = useState("");
@@ -43,6 +45,9 @@ export const Packs = () => {
         setFilterPackName(e.currentTarget.value);
         dispatch(getPacksTC(filterPackName, 0, 999, 1, 10))
     },[filterPackName]);
+
+    if(loading) return <h1>Загрузка...</h1>
+    if(error) return <h1>Ошибка...</h1>
     
     return (
         <div className={styles.container}>

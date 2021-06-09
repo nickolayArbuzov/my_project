@@ -8,7 +8,7 @@ const usersInitialState = {
     page: 1, 
     pageCount: 1,
     loading: false,
-    error: null,
+    error: '',
 }
 
 export const usersReducer = (state: UsersInitialState = usersInitialState, action: ActionType): UsersInitialState => {
@@ -17,13 +17,13 @@ export const usersReducer = (state: UsersInitialState = usersInitialState, actio
             return {
                 ...state,
                 loading: true,
-                error: action.error,
+                error: '',
             }
         case "USERS/FETCH_USERS_ERROR":
             return {
                 ...state,
                 loading: false,
-                error: null,
+                error: action.error,
             }
         case "USERS/GET_USERS":
             return {
@@ -34,7 +34,7 @@ export const usersReducer = (state: UsersInitialState = usersInitialState, actio
                 page: action.page, 
                 pageCount: action.pageCount,
                 loading: false,
-                error: null,
+                error: '',
             }
         default:
             return state;
@@ -44,7 +44,7 @@ export const usersReducer = (state: UsersInitialState = usersInitialState, actio
 //Action
 export const getUsersAC = (userName: string, min: number, max: number, page: number, pageCount: number) => (
     {type: "USERS/GET_USERS", userName, min, max, page, pageCount} as const);
-export const fetchUsersAC = (loading: boolean, error: null) => (
+export const fetchUsersAC = (loading: boolean, error: string) => (
     {type: "USERS/FETCH_USERS", loading, error} as const);
 export const fetchUsersErrorAC = (loading: boolean, error: string) => (
     {type: "USERS/FETCH_USERS_ERROR", loading, error} as const);

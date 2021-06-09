@@ -13,7 +13,7 @@ const packsInitialState = {
     cardPacksTotalCount: 0,
     created: '',
     loading: false,
-    error: null,
+    error: '',
 }
 
 export const packsReducer = (state: PacksInitialState = packsInitialState, action: ActionType): PacksInitialState => {
@@ -22,13 +22,13 @@ export const packsReducer = (state: PacksInitialState = packsInitialState, actio
             return {
                 ...state,
                 loading: true,
-                error: action.error,
+                error: '',
             }
         case "PACKS/FETCH_PACKS_ERROR":
             return {
                 ...state,
                 loading: false,
-                error: null,
+                error: action.error,
             }
         case "PACKS/GET_PACKS":
             return {...state, 
@@ -36,6 +36,8 @@ export const packsReducer = (state: PacksInitialState = packsInitialState, actio
                 cardPacksTotalCount: action.cardPacksTotalCount,
                 page: action.page,
                 pageCount: action.pageCount,
+                loading: false,
+                error: '',
             }
         case "PACKS/ADD_PACK":
             return {...state, 
@@ -57,7 +59,7 @@ export const packsReducer = (state: PacksInitialState = packsInitialState, actio
 }
 
 //Action
-export const fetchPacksAC = (loading: boolean, error: null) => (
+export const fetchPacksAC = (loading: boolean, error: string) => (
     {type: "PACKS/FETCH_PACKS", loading, error} as const);
 export const fetchPacksErrorAC = (loading: boolean, error: string) => (
     {type: "PACKS/FETCH_PACKS_ERROR", loading, error} as const);
@@ -72,11 +74,14 @@ export const updatePackAC = (id: string, packName: string) => (
 
 //TC    
 export const getPacksTC = (packName: string, min: number, max: number, page: number, pageCount: number) => (dispatch: Dispatch) => {
+    dispatch(fetchPacksAC(true, ''))
     return packsAPI.getPacks(packName, min, max, page, pageCount)
         .then((res) => {
             dispatch(getPacksAC(res.data.cardPacks, res.data.cardPacksTotalCount, res.data.page, res.data.pageCount));
         })
-        .catch((error) => alert(error))
+        .catch((error) => {
+            dispatch(fetchPacksAC(false, 'Error'))
+        })
 }
 export const addPackTC = (packName: string, privatePack: boolean) => (dispatch: Dispatch) => {
     return packsAPI.addPack(packName, privatePack)
