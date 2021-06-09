@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {resPasswordTC} from "../../state/reducers/passwordRecovery";
+import {resPasswordTC} from "../../state/reducers/PasswordRecoveryReducer";
 import {appRootStateType} from "../../state/store";
 import {Redirect} from "react-router-dom";
 import {PATH} from "../../Routes/Routes";

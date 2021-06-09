@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {cardsTC} from "../../state/reducers/cards";
-import {updateGradeTC} from "../../state/reducers/grade";
+import {cardsTC} from "../../state/reducers/CardsReducer";
+import {updateGradeTC} from "../../state/reducers/GradeReducer";
 import {appRootStateType} from "../../state/store";
 import {Redirect} from "react-router-dom";
 import {PATH} from "../../Routes/Routes";

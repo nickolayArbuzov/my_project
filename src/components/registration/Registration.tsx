@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import styles from "./Registration.module.css"
 import {useDispatch, useSelector} from "react-redux";
-import {register} from "../../state/reducers/registration";
+import {register} from "../../state/reducers/RegistrationReducer";
 import {minLengthCreator} from "../../utils/validators/validators";
 import {appRootStateType} from "../../state/store";
 import {Redirect} from "react-router-dom";

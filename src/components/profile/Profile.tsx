@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {usersTC} from "../../state/reducers/users";
+import {usersTC} from "../../state/reducers/UsersReducer";
 import {logoutTC} from "../../state/reducers/AuthReducer";
 import {Redirect} from "react-router-dom";
 import {appRootStateType} from "../../state/store";

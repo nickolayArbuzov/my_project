@@ -1,6 +1,6 @@
 import React, {useState, useCallback} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {loginTC} from "../../state/reducers/login";
+import {loginTC} from "../../state/reducers/LoginReducer";
 import {Redirect} from "react-router-dom";
 import {appRootStateType} from "../../state/store";
 import styles from './Login.module.css';

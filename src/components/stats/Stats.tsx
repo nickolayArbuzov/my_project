@@ -1,6 +1,6 @@
 import React, {useCallback, useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getPacksTC} from "../../state/reducers/packs";
+import {getPacksTC} from "../../state/reducers/PacksReducer";
 import {CardPackType} from "../../api/api";
 import {appRootStateType} from "../../state/store";
 import {Redirect} from "react-router-dom";
