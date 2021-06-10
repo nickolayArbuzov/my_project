@@ -21,13 +21,13 @@ export const packsReducer = (state: PacksInitialState = packsInitialState, actio
         case "PACKS/FETCH_PACKS":
             return {
                 ...state,
-                loading: true,
-                error: '',
+                loading: action.loading,
+                error: action.error,
             }
         case "PACKS/FETCH_PACKS_ERROR":
             return {
                 ...state,
-                loading: false,
+                loading: action.loading,
                 error: action.error,
             }
         case "PACKS/GET_PACKS":
@@ -36,8 +36,6 @@ export const packsReducer = (state: PacksInitialState = packsInitialState, actio
                 cardPacksTotalCount: action.cardPacksTotalCount,
                 page: action.page,
                 pageCount: action.pageCount,
-                loading: false,
-                error: '',
             }
         case "PACKS/ADD_PACK":
             return {...state, 
@@ -78,9 +76,10 @@ export const getPacksTC = (packName: string, min: number, max: number, page: num
     return packsAPI.getPacks(packName, min, max, page, pageCount)
         .then((res) => {
             dispatch(getPacksAC(res.data.cardPacks, res.data.cardPacksTotalCount, res.data.page, res.data.pageCount));
+            dispatch(fetchPacksAC(false, ''));
         })
         .catch((error) => {
-            dispatch(fetchPacksAC(false, 'Error'))
+            dispatch(fetchPacksErrorAC(false, 'Error'))
         })
 }
 export const addPackTC = (packName: string, privatePack: boolean) => (dispatch: Dispatch) => {
